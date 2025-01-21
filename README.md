@@ -1,5 +1,7 @@
 # Backend Web Dev Project 1
 
+20.1.25
+
 In this project I will be building an E-Commerce application from scratch using the MERN Stack.
 
 After completing this project I will be able to :
@@ -15,4 +17,7 @@ Concpets covered in this project are :
     - Role of authentication in web applications
 .
 
+21.1.25
 
+## Milestone 2 - Creating a login page.
+I created a login page using react. Also started using tailwind css. Achieved this milestone. 
