@@ -15,4 +15,4 @@ Concpets covered in this project are :
     - Role of authentication in web applications
 .
 
-
+Added a login page and also created and connected a database.
