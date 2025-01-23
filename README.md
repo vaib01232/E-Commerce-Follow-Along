@@ -17,7 +17,6 @@ Concpets covered in this project are :
     - Role of authentication in web applications
 .
 
-21.1.25
+Added a login page and also created and connected a database.21.1.25
 
-## Milestone 2 - Creating a login page.
-I created a login page using react. Also started using tailwind css. Achieved this milestone. 
+
