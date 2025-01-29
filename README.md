@@ -19,4 +19,3 @@ Concpets covered in this project are :
 
 Added a login page and also created and connected a database.21.1.25
 
-
