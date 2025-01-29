@@ -1,27 +1,24 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const connectDB = require('./src/Database/database');
+const express=require('express');
+const app=express();
+const connectDB=require('./src/Database/database');
+const userRouter=require('./src/Controller/User');
 
-dotenv.config({
+require('dotenv').config({
     path:'./src/Config/.env'
 });
 
-const app = express();
-const port = process.env.port || 3000;
-const url = process.env.db_url;
+const port=process.env.port;
+const url=process.env.db_url;
 
-app.get('/',(req,res)=>{
-    res.send("Hello World!");
-})
-
-app.listen(port,async()=>{
+app.listen(3000,async ()=>{
+    console.log(`Server is running on port ${port}`);
     try{
         await connectDB(url);
-        console.log(`Server is running on port ${port}`)
-    }
-    catch(err){
-        console.log(err);
+    }catch(error){
+        console.log(error);
     }
 })
 
+app.use(express.json());
 
+ app.use('/auth',userRouter)
