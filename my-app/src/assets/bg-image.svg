@@ -1,19 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" preserveAspectRatio="none">
-  <!-- Black and White Mixed Background -->
+  <!-- Dark Background -->
   <defs>
     <linearGradient id="backgroundGradient" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#000000" />
-      <stop offset="100%" stop-color="#1a1a1a" />
+      <stop offset="100%" stop-color="#0a0a0a" />
     </linearGradient>
-    <pattern id="diagonalLines" patternUnits="userSpaceOnUse" width="10" height="10">
-      <path d="M0,10 L10,0" stroke="#ffffff" stroke-width="0.5" />
-    </pattern>
   </defs>
   <rect width="1920" height="1080" fill="url(#backgroundGradient)" />
 
-  <!-- Diagonal Lines in Corners -->
-  <line x1="0" y1="0" x2="200" y2="200" stroke="#ffffff" stroke-width="1" opacity="0.2" />
-  <line x1="1920" y1="0" x2="1720" y2="200" stroke="#ffffff" stroke-width="1" opacity="0.2" />
-  <line x1="0" y1="1080" x2="200" y2="880" stroke="#ffffff" stroke-width="1" opacity="0.2" />
-  <line x1="1920" y1="1080" x2="1720" y2="880" stroke="#ffffff" stroke-width="1" opacity="0.2" />
+  <!-- Network Effect -->
+  <g stroke="#00ffff" stroke-width="1" opacity="0.6">
+    <!-- Lines -->
+    <line x1="400" y1="300" x2="700" y2="500" />
+    <line x1="700" y1="500" x2="1200" y2="400" />
+    <line x1="1200" y1="400" x2="1400" y2="800" />
+    <line x1="1400" y1="800" x2="900" y2="900" />
+    <line x1="900" y1="900" x2="400" y2="300" />
+    <line x1="400" y1="300" x2="1200" y2="400" />
+
+    <!-- Dots -->
+    <circle cx="400" cy="300" r="5" fill="#00ffff" />
+    <circle cx="700" cy="500" r="5" fill="#00ffff" />
+    <circle cx="1200" cy="400" r="5" fill="#00ffff" />
+    <circle cx="1400" cy="800" r="5" fill="#00ffff" />
+    <circle cx="900" cy="900" r="5" fill="#00ffff" />
+  </g>
+
+  <!-- Subtle Glow -->
+  <g opacity="0.2">
+    <circle cx="400" cy="300" r="50" fill="#00ffff" />
+    <circle cx="700" cy="500" r="50" fill="#00ffff" />
+    <circle cx="1200" cy="400" r="50" fill="#00ffff" />
+    <circle cx="1400" cy="800" r="50" fill="#00ffff" />
+    <circle cx="900" cy="900" r="50" fill="#00ffff" />
+  </g>
 </svg>

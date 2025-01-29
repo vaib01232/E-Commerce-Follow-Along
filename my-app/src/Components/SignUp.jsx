@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./signup.css";
-import logo from "../assets/user-logo.jpg";
+import logo from "../assets/image.png";
 import RxAvatar from "react-avatar";
 
 export default function Example() {
