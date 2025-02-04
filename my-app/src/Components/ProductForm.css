@@ -1,0 +1,33 @@
+.form-container { 
+    margin-left: 35%;
+    height:90vh;
+    width: 70vh;
+
+}
+
+.form-container *{
+    display: flex;
+    flex-direction: column ;
+    font-family: sans-serif;
+    font-size: 17px;
+}
+
+.form-container input {
+    font-size: 17px;
+    padding: 5px;
+    border: solid 1px black;
+    margin-bottom: 10px;
+}
+
+.submit-btn {
+    padding: 5px;
+    padding-left: 20px;
+    height: 35px;
+    width: 100px;
+    background-color: rgb(58, 58, 58);
+    
+}
+
+.form-container label {
+    margin-top: 0px;
+}
