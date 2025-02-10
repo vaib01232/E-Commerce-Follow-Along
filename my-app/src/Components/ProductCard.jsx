@@ -1,14 +1,56 @@
-import React from "react";
+import React,{useEffect,useState} from 'react';
+import PropTypes from 'prop-types';
 
-const ProductCard = ({ image, name, price, description }) => {
-  return (
-    <div className="bg-white rounded-lg shadow-lg p-4">
-      <img src={image} alt={name} className="w-full h-50 object-cover" />
-      <h1 className="text-lg font-bold text-neutral-900">{name}</h1>
-      <p className="text-neutral-500">{price}</p>
-      <p className="text-neutral-700">{description}</p>
-    </div>
-  );
+
+
+export default function ProductCard({product}) {
+
+    useEffect(()=>{
+        document.body.style.backgroundColor='azure'
+      })
+    
+      
+    const [imgIndex,setImgIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setImgIndex((prev) => {
+                console.log(prev + 1);
+                return (prev + 1)%(product.image.length-1) ;
+            });
+        }, 2000);
+    
+        return () => clearInterval(interval); // Cleanup when unmounting
+    }, [imgIndex]);
+
+    
+
+    return (
+        <div>
+            <div className='flex flex-col text-black'>
+                
+                <img src={product.image[imgIndex]} alt="" />
+                <h2 className='text-black'>{product.name}</h2>
+                <h4>
+                    {product.description}
+                </h4>
+            </div>
+            <div>
+                <h2 className='text-black'>
+                    ${product.price}
+                </h2>
+                <button>Buy Now</button>
+            </div>
+            
+        </div>
+    )
+}
+
+ProductCard.propTypes = {
+    product: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+        image: PropTypes.array.isRequired,
+    }).isRequired,
 };
-
-export default ProductCard;

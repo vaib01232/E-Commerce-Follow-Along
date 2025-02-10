@@ -1,43 +1,110 @@
-import React from "react";
-import ProductCard from "../components/ProductCard";
+import React,{useState,useEffect} from 'react';
+import ProductCard from '../Components/ProductCard';
+import axios from 'axios'
 
-const productDetails = [
-  {
-    image: "https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UP_HP_4span_D?$promotionTilesDesktop4span$&fmt=png-alpha",
-    name: "Product 1",
-    price: "$2",
-    description: "Extremely overpriced TV",
-  },
-  {
-    image: "https://m.media-amazon.com/images/I/61vIICn1JOL._SX522_.jpg",
-    name: "Product 2",
-    price: "$1",
-    description: "Extremely overpriced headphones",
-  },
-  {
-    image: "https://m.media-amazon.com/images/I/81M9g3GdjFL._SX522_.jpg",
-    name: "Product 3",
-    price: "$10",
-    description: "Extremely overpriced home theater",
-  },
-  {
-    image: "https://m.media-amazon.com/images/I/61nTNphSBvL._SX679_.jpg",
-    name: "A Gaming Laptop",
-    price: "$15",
-    description: "Nice laptop but not for laps",
-  },
-];
+// const productDetails=[
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 1',
+    //     price:100,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 2',
+    //     price:150,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 3',
+    //     price:300,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 4',
+    //     price:150,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 5',
+    //     price:300,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 1',
+    //     price:100,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 2',
+    //     price:150,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 3',
+    //     price:300,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 4',
+    //     price:150,
+    //     description:'This is a product'
+    // },
+    // {
+    //     image:["https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244648_1280.jpg","https://cdn.pixabay.com/photo/2022/01/03/19/39/flag-6913477_1280.jpg","https://cdn.pixabay.com/photo/2017/07/02/00/43/bundestag-2463236_1280.jpg",'https://picsum.photos/150'],
+    //     name:'Product 5',
+    //     price:300,
+    //     description:'This is a product'
+    // }
+    
+// ]
 
-const Homepage = () => {
-  return (
-    <div className="w-full min-h-screen">
-      <div className="grid grid-cols-5 gap-4 p-4">
-        {productDetails.map((product, index) => (
-          <ProductCard key={index} {...product} />
-        ))}
-      </div>
-    </div>
-  );
-};
 
-export default Homepage;
+
+
+export default function Homepage() {
+    const [productDetails,setProductDetails]=useState([])
+    const [loading,setLoading]=useState(true);
+    const [error,setError]=useState("")
+
+    useEffect(()=>{
+        async ()=>{
+            await axios.fetch("http://localhost:3000/product/get-products")
+        .then((res)=>{
+            if (!res.ok){
+                throw new Error(`HTTP Error! status:${res.status}`)
+            }
+            return res.json()
+        }).then((data)=>{
+            setProductDetails(data.Products);
+            setLoading(false);
+            
+        }).catch((err)=>{
+            console.error(err)
+            setError(err)
+        })
+        }
+        
+    })
+
+    return (
+        <>
+        
+        <div className='grid grid-cols-5 gap-4  align-items-center'>
+        {
+            productDetails.map((product,index) => {
+                return <ProductCard key={index} product={product} />
+            })
+        }
+        </div>
+       
+        </>
+    )
+}

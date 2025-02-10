@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ProductForm.css'
 
-export const ProductForm = () => {
+export const Productform = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
@@ -13,6 +12,10 @@ export const ProductForm = () => {
 
     const [preview, setPreview] = useState([]);
     const [image, setImage] = useState([]);
+
+    useEffect(()=>{
+        document.getElementsByTagName('body')[0].style.backgroundImage=`url(${bgg})`
+    })
 
     const handleImage = (e) => {
         const files = Array.from(e.target.files);
@@ -55,9 +58,11 @@ export const ProductForm = () => {
     };
 
     return (
-        <div className='form-container'>
+        <div className='flex justify-center items-center h-screen text-black'>
+            <div className='form-container bg-white p-4 rounded-lg shadow-lg w-96 display flex justify-center items-center flex-col'>
             <form onSubmit={handleSubmit}>
-                <div className="div-email">
+                <h1 className='text-2xl font-bold mb-4 '>Add Product</h1>
+                <div className="div-email mt-1 ">
                     <label>Email</label>
                     <input
                         type="email"
@@ -65,10 +70,11 @@ export const ProductForm = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                         placeholder="Enter your email"
+                        className='border border-gray-500 rounded-md p-1 w-full mt-1 bg-indigo-50'
                     />
                 </div>
 
-                <div className="div-name">
+                <div className="div-name mt-1 ">
                     <label>Name</label>
                     <input
                         type="text"
@@ -76,10 +82,11 @@ export const ProductForm = () => {
                         onChange={(e) => setName(e.target.value)}
                         value={name}
                         placeholder="Enter your name"
+                        className='border border-gray-500 rounded-md p-1 w-full mt-1 bg-indigo-50'
                     />
                 </div>
 
-                <div className="div-price">
+                <div className="div-price mt-1 ">
                     <label>Price</label>
                     <input
                         type="number"
@@ -87,10 +94,11 @@ export const ProductForm = () => {
                         onChange={(e) => setPrice(e.target.value)}
                         value={price}
                         placeholder="Enter the price"
+                        className='border border-gray-500 rounded-md p-1 w-full mt-1 bg-indigo-50'
                     />
                 </div>
 
-                <div className="div-description">
+                <div className="div-description mt-1 ">
                     <label>Description</label>
                     <input
                         type="text"
@@ -98,10 +106,11 @@ export const ProductForm = () => {
                         onChange={(e) => setDescription(e.target.value)}
                         value={description}
                         placeholder="Enter a description"
+                        className='border border-gray-500 rounded-md p-1 w-full mt-1 bg-indigo-50'
                     />
                 </div>
 
-                <div className="div-category">
+                <div className="div-category mt-1 ">
                     <label>Category</label>
                     <input
                         type="text"
@@ -109,10 +118,11 @@ export const ProductForm = () => {
                         onChange={(e) => setCategory(e.target.value)}
                         value={category}
                         placeholder="Enter the category"
+                        className='border border-gray-500 rounded-md p-1 w-full mt-1 bg-indigo-50'
                     />
                 </div>
 
-                <div className="div-stock">
+                <div className="div-stock mt-1 ">
                     <label>Stock</label>
                     <input
                         type="number"
@@ -120,10 +130,11 @@ export const ProductForm = () => {
                         onChange={(e) => setStock(e.target.value)}
                         value={stock}
                         placeholder="Enter stock available"
+                        className='border border-gray-500 rounded-md p-1 w-full mt-1 bg-indigo-50'
                     />
                 </div>
 
-                <div className="div-tag">
+                <div className="div-tag mt-1 ">
                     <label>Tag</label>
                     <input
                         type="text"
@@ -131,21 +142,23 @@ export const ProductForm = () => {
                         onChange={(e) => setTag(e.target.value)}
                         value={tag}
                         placeholder="Enter the tag"
+                        className='border border-gray-500 rounded-md p-1 w-full mt-1 bg-indigo-50'
                     />
                 </div>
 
-                <div className="div-image">
+                <div className="div-image mt-1 ">
                     <label>Product Image</label>
                     <input
                         type="file"
                         multiple
                         required
                         onChange={handleImage}
+                        className='mt-1 '
                     />
                 </div>
 
                 <div>
-                    <button className='submit-btn' type="submit">Submit</button>
+                    <button type="submit" className='bg-indigo-500 rounded-md p-2 w-full mt-4 text-white'>Submit</button>
                 </div>
 
                 <div className="div-preview">
@@ -154,6 +167,7 @@ export const ProductForm = () => {
                     ))}
                 </div>
             </form>
+        </div>
         </div>
     );
 };
