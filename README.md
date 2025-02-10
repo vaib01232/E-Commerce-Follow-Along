@@ -69,3 +69,9 @@ Created a product form page.
 ## Milestone 10: 
 Defined the structure of product data
 Built a POST endpoint to receive product data.
+
+## Milestone 11:
+Fetches and displays Products 
+Created an API endpoint to fetch all products from the database.
+Implemented a frontend function to fetch and display product data dynamically.
+Used useState and useEffect to manage the data lifecycle.
