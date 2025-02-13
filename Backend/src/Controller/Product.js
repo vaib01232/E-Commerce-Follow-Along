@@ -11,7 +11,7 @@ productRouter.get('/get-products',async (req,res)=>{
             return res.status(400).json({message:"No products foud"})
         }
         console.log(products)
-        return res.status(200).json({products:products})
+        return res.status(200).json(    {products:products})
     }catch(err){
         console.log(err)
     }

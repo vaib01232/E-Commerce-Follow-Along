@@ -1,37 +1,26 @@
-const {Router} =require('express');
-const {productupload} = require("../../multer");
-const {Productmodel} = require("../Model/productModel");
-const productrouter = Router();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const productRoutes = require("./routes/productRoutes"); 
+const app = express();
 
-productrouter.get("/",(req,res) => {
-    res.send("Product router");
+
+app.use(express.json()); 
+app.use(cors());
+
+
+mongoose.connect("your_mongodb_connection_string", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
+.then(() => console.log("MongoDB Connected"))
+.catch((err) => console.error("MongoDB Connection Error:", err));
 
-productrouter.post("/",productupload.array('files'),async (req,res) => {
-    const{name,description,email,price,category,stock,tags} = req.body;
-     const images = req.files.map(file => file.path);
-     try {
-        const seller = await Productmodel.findOne({email: email})
-        if(!seller){
-            return res.status(400).json({error: "User not found"});
-        }
-        if(images.length==0){
-            return res.status(400).json({error: "Please upload at least one image"});
-        }
 
-        const newproduct = await Productmodel.create({
-            name: name,
-            email: email,
-            description: description,
-            category: category,
-            price: price,
-            stock: stock,
-            tags: tags,
-            images: images
-        })
-        return res.status(200).json({message: "Product created",product: newproduct});
+app.use("/products", productRoutes);
 
-     } catch (error) {
-         console.log(error);
-    }
-})
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

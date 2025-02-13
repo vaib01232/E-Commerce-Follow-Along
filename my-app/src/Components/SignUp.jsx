@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./signup.css";
 import logo from "../assets/image.png";
-import RxAvatar from "react-avatar";
+import Avatar from "react-avatar";
 
-export default function Example() {
+export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,117 +20,73 @@ export default function Example() {
     e.preventDefault();
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match!");
+      return;
     }
+    // Handle sign-up logic here
+    console.log({ name, email, password, avatar });
   };
 
   return (
     <div className="whole-thing">
-        <div className="container">
-      {/* Burl texture placed here */}
-      <div className="burl"></div>
+      <div className="container">
+        <div className="burl"></div>
 
-      <div className="logo-container">
-        <img alt="Your Company" src={logo} className="logo" />
-        <h2 className="title">Create your account</h2>
-      </div>
+        <div className="logo-container">
+          <img alt="Your Company" src={logo} className="logo" />
+          <h2 className="title">Create your account</h2>
+        </div>
 
-      <div className="form-container">
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="name">
-            <label htmlFor="username" className="label">
-              Name
-            </label>
-            <input id="username" name="username" type="text" required className="input" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email" className="label">
-              Email address
-            </label>
-            <input id="email" name="email" type="email" required className="input" />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password" className="label">
-              Password
-            </label>
-            <div className="password-container">
+        <div className="form-container">
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name" className="label">Name</label>
               <input
-                id="password"
-                name="password"
-                type={showPassword ? "text" : "password"}
+                id="name"
+                type="text"
                 required
                 className="input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="toggle-password"
-              >
-                {showPassword ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.98 8.466C4.955 7.364 7.276 5.25 12 5.25c4.723 0 7.045 2.114 8.02 3.216a3.984 3.984 0 01.89 2.284c0 .88-.324 1.696-.89 2.284-.975 1.102-3.297 3.216-8.02 3.216-4.723 0-7.045-2.114-8.02-3.216a3.984 3.984 0 01-.89-2.284c0-.88.324-1.696.89-2.284z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.98 8.466C4.955 7.364 7.276 5.25 12 5.25c4.723 0 7.045 2.114 8.02 3.216a3.984 3.984 0 01.89 2.284c0 .88-.324 1.696-.89 2.284-.975 1.102-3.297 3.216-8.02 3.216-4.723 0-7.045-2.114-8.02-3.216a3.984 3.984 0 01-.89-2.284c0-.88.324-1.696.89-2.284z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <line
-                      x1="4.5"
-                      y1="4.5"
-                      x2="19.5"
-                      y2="19.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
-                )}
-              </button>
             </div>
-          </div>
+            <div className="form-group">
+              <label htmlFor="email" className="label">Email address</label>
+              <input
+                id="email"
+                type="email"
+                required
+                className="input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="confirm-password" className="label">
-              Confirm password
-            </label>
-            {/* Error Message */}
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <div className="password-container">
+            <div className="form-group">
+              <label htmlFor="password" className="label">Password</label>
+              <div className="password-container">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  className="input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="toggle-password"
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirm-password" className="label">Confirm Password</label>
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
               <input
                 id="confirm-password"
-                name="confirm-password"
                 type={showPassword ? "text" : "password"}
                 required
                 className="input"
@@ -137,40 +94,38 @@ export default function Example() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-          </div>
 
-          <div className="avatar-upload">
-            <label htmlFor="avatar" className="block text-sm font-medium leading-6 text-white">
-            </label>
-            <div className="mt-2 flex items-center">
-              <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
-                {avatar ? (
-                  <img src={URL.createObjectURL(avatar)} alt="avatar" className="h-full w-full object-cover rounded-full" />
-                ) : (
-                  <RxAvatar className="h-8 w-8" />
-                )}
-              </span>
-              <label htmlFor="file-input" className="ml-5 flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-white">
-                Upload a file
+            <div className="avatar-upload">
+              <label htmlFor="file-input" className="block text-sm font-medium leading-6 text-white">
+                Upload Avatar
               </label>
-              <input
-                type="file"
-                name="avatar"
-                id="file-input"
-                accept=".jpg,.jpeg,.png"
-                className="sr-only"
-                onChange={(e) => setAvatar(e.target.files[0])}
-              />
+              <div className="mt-2 flex items-center">
+                <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
+                  {avatar ? (
+                    <img src={URL.createObjectURL(avatar)} alt="avatar" className="h-full w-full object-cover rounded-full" />
+                  ) : (
+                    <Avatar className="h-8 w-8" />
+                  )}
+                </span>
+                <label htmlFor="file-input" className="ml-5 flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-white cursor-pointer">
+                  Choose File
+                </label>
+                <input
+                  type="file"
+                  id="file-input"
+                  accept=".jpg,.jpeg,.png"
+                  className="sr-only"
+                  onChange={(e) => setAvatar(e.target.files[0])}
+                />
+              </div>
             </div>
-          </div>
 
-          <button type="submit" className="submit-btn">
-            Create Account
-          </button>
-        </form>
+            <button type="submit" className="submit-btn">
+              Create Account
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
-    
-  );
+  );
 }

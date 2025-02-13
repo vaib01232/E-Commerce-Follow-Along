@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import bgg from './../assets/bg_regis.jpg'
 
 export const Productform = () => {
     const [name, setName] = useState('');
@@ -24,7 +25,7 @@ export const Productform = () => {
         setPreview(img);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => { 
         e.preventDefault();
         const formData = new FormData();
         formData.append('name', name);
@@ -42,7 +43,7 @@ export const Productform = () => {
         console.log(formData);
         alert('Product added successfully');
 
-        const res = await axios.post('http://localhost:5173/productForm', formData);
+        const res = await axios.post('http://localhost:3000/product/post-product', formData);
 
         if (res.status === 200) {
             setName('');
