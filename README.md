@@ -209,3 +209,9 @@ Profile Page Implementation
 - Fetch and display user data from the backend.
 
 3. Display User Information
+
+# Milestone 21:
+
+1. created address form frontend page
+2. Created an state that will store input address
+3. when we click on add address in profile it should navigate to this form page.
