@@ -215,3 +215,7 @@ Profile Page Implementation
 1. created address form frontend page
 2. Created an state that will store input address
 3. when we click on add address in profile it should navigate to this form page.
+
+# Milestone 22: 
+1. created an endpoint that will receive the address from address form in frontend.
+2. Add the address to the address array inside user collection.
