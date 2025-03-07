@@ -215,3 +215,36 @@ Profile Page Implementation
 1. created address form frontend page
 2. Created an state that will store input address
 3. when we click on add address in profile it should navigate to this form page.
+
+
+----
+
+## Milestone 22 - Implement Address Storage Endpoint
+1. Create the Endpoint in Express
+- Defined a POST route to handle incoming address data.
+- Extracted the user ID and address from the request body.
+- Updated the user document by adding the new address to the address array.
+
+----
+
+## Milestone 23: Implementing Place Order Functionality 
+1. Create a Place Order Button
+- Inside the Cart Page, add a Place Order button.
+- When clicked, navigate to the Select Address page.
+2. Create the Select Address Page
+- Display all available addresses of the user.
+- Provide an option to select one address.
+3. Backend Endpoint for User Addresses
+- Write a backend API endpoint to fetch all the addresses of the user
+
+----
+
+## Milestone 24: Finalizing the Order Process 
+1. Display Ordered Products
+- Show all the products that the user is ordering.
+2. Display Selected Address
+- Show the address chosen by the user for delivery.
+3. Show Cart Total Value
+- Calculate and display the total amount of the cart.
+4. Add Place Order Button
+- At the bottom, provide a Place Order button to confirm the order.
