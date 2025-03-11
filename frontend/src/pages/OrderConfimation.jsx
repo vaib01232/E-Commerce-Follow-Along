@@ -16,12 +16,11 @@ const OrderConfirmation = () => {
 
     useEffect(() => {
         if (!addressId || !email) {
-            navigate('/select-address'); // Redirect if no address selected or email missing
+            navigate('/select-address'); 
             return;
         }
         const fetchData = async () => {
             try {
-                // Fetch selected address
                 const addressResponse = await axios.get('http://localhost:8000/api/v2/user/addresses', {
                     params: { email: email },
                 });
@@ -34,7 +33,6 @@ const OrderConfirmation = () => {
                     throw new Error('Selected address not found.');
                 }
                 setSelectedAddress(address);
-                // Fetch cart products from /cartproducts endpoint
                 const cartResponse = await axios.get('http://localhost:8000/api/v2/product/cartproducts', {
                     params: { email: email },
                 });
@@ -42,7 +40,6 @@ const OrderConfirmation = () => {
                     throw new Error(`Failed to fetch cart products. Status: ${cartResponse.status}`);
                 }
                 const cartData = cartResponse.data;
-                // Map cart items to include full image URLs
                 const processedCartItems = cartData.cart.map(item => ({
                     _id: item.productId._id,
                     name: item.productId.name,
@@ -51,7 +48,6 @@ const OrderConfirmation = () => {
                     quantity: item.quantity,
                 }));
                 setCartItems(processedCartItems);
-                // Calculate total price
                 const total = processedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
                 setTotalPrice(total);
             } catch (err) {

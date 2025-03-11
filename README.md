@@ -248,3 +248,10 @@ Profile Page Implementation
 - Calculate and display the total amount of the cart.
 4. Add Place Order Button
 - At the bottom, provide a Place Order button to confirm the order.
+
+## Milestone 25: Place Order Button
+
+1. Added a "Place Order" button.
+
+2. Implemented a click event to log "Order Successful" in the console.
+
