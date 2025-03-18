@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const productRoutes = require("./routes/productRoutes"); 
+const productRoutes = require("./src/Routers/productRoutes"); 
 const app = express();
 
 
@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 
-mongoose.connect("your_mongodb_connection_string", {
+mongoose.connect("mongodb+srv://vaibhaav2006:vaibhaav2006@cluster0.fosaa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })

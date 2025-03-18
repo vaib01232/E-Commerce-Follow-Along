@@ -39,7 +39,7 @@ const userSchema=new Schema({
         required: [true, "Please enter your tags"],
       },
       images:{
-        type: listof(String),
+        type: [String],
         required: [true, "Please add your imgs"],
       },
       createdAt:{

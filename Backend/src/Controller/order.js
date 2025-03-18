@@ -76,35 +76,24 @@ router.get('/my-orders', authMiddleware, async (req, res) => {
     }
 });
 
-// Cancel order endpoint
-router.delete('/cancel/:orderId', authMiddleware, async (req, res) => {
+
+router.patch('/cancelorder/:orderId', async (req, res) => {
     try {
         const { orderId } = req.params;
-        const userId = req.user.id; // Get userId from auth middleware
-        
-        const order = await Order.findOne({ _id: orderId, user: userId });
-        
+        console.log("fff")
+        const order = await Order.findById(orderId);
+        console.log(order);
         if (!order) {
             return res.status(404).json({ message: 'Order not found.' });
         }
-        
-        if (order.status !== 'Pending') {
-            return res.status(400).json({ 
-                message: 'Only pending orders can be cancelled.' 
-            });
-        }
-        
-        order.status = 'Cancelled';
+
+        order.orderStatus = 'Cancelled';
         await order.save();
-        
-        res.status(200).json({ 
-            message: 'Order cancelled successfully.',
-            order 
-        });
+
+        res.status(200).json({ message: 'Order cancelled successfully.', order });
     } catch (error) {
         console.error('Error cancelling order:', error);
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 });
-
 module.exports = router;
