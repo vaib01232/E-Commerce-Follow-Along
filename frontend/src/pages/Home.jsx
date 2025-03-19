@@ -68,8 +68,6 @@ const productDetails = [
 ]
 
 
-
-
 export default function Homepage() {
     const [productDetails,setProductDetails]=useState([])
     const [loading,setLoading]=useState(true);
