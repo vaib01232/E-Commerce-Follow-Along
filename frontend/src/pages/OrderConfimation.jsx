@@ -134,7 +134,7 @@ const OrderConfirmation = () => {
       </div>
 
       {paymentMethod === "PayPal" && (
-        <PayPalScriptProvider options={{ clientId: "AQtnLb0Vc9NHKrA_O8vFpbA7JgVOhs0kUaMoipBwHq6IJiwdoE4NaaNGqK9yx3DYI6Zgr1p_QppIHxOh" }}>
+        <PayPalScriptProvider options={{ clientId: "AW78-TcxiCBodENWIJtudObD6al4SGS-CKaVm-qFghtbiLZz9jMfzA7W5Nf3loR8tflCjBPnpRicDyQk" }}>
           <PayPalButtons
             style={{ layout: "horizontal" }}
             createOrder={(data, actions) => {
@@ -149,10 +149,6 @@ const OrderConfirmation = () => {
               });
             }}
             onApprove={(data, actions) => {
-              return actions.order.capture().then((details) => {
-                alert(`Transaction completed by ${details.payer.name.given_name}`);
-                placeOrder(true);
-              });
             }}
           />
         </PayPalScriptProvider>
