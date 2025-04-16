@@ -1,5 +1,5 @@
 const {Router}=require('express');
-const auth = require('../Middleware/auth');
+const auth = require('../Middleware/Auth');
 const user=require("../Model/userModel");
 const orders = require('../Model/OrderSchema');
 const rolemiddleware = require('../Middleware/role');
