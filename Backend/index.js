@@ -12,7 +12,7 @@ app.use("/productuploads", express.static("productuploads"));
 app.use("/productuploads", express.static(path.join(__dirname, "productuploads")));
 const cors = require('cors');
 app.use(cors({
-  origin: 'https://e-commerce-follow-along-78v4.onrender.com',  // your frontend dev URL
+  origin: 'https://3ceb9797.vaib-ecommerce-follow-along.pages.dev',  // your frontend dev URL
   credentials: true
 }));
 
