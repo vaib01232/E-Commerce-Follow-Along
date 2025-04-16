@@ -6,7 +6,7 @@ const NavBar = () => {
         setIsOpen(!isOpen);
     };
     return (
-        <nav className="bg-purple-600">
+        <nav className="bg-sky-500">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     {/* Hamburger Menu Button (visible on mobile) */}
@@ -104,6 +104,30 @@ const NavBar = () => {
                                     Cart
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink
+                                    to="/profile"
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "text-white font-semibold px-3 py-2 rounded-md text-md transition-colors duration-200"
+                                            : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-md transition-colors duration-200"
+                                    }
+                                >
+                                    Profile
+                                </NavLink>
+                        </li>
+                        <li>
+                                  <NavLink
+                                      to="/myorders"
+                                      className={({ isActive }) =>
+                                          isActive
+                                              ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                              : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                      }
+                                  >
+                                      My Orders
+                                  </NavLink>
+                              </li>
                         </ul>
                     </div>
                 </div>

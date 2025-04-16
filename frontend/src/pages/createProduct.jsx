@@ -28,7 +28,7 @@ const CreateProduct = () => {
   useEffect(() => {
       if (isEdit) {
           axios
-              .get(`http://localhost:8000/api/v2/product/product/${id}`)
+              .get(`http://localhost:8000/product/product/${id}`)
               .then((response) => {
                   const p = response.data.product;
                   setName(p.name);
@@ -75,7 +75,7 @@ const CreateProduct = () => {
         try {
           if (isEdit) {
             const response = await axios.put(
-                `http://localhost:8000/api/v2/product/update-product/${id}`,
+                `http://localhost:8000/product/edit-product/${id}`,
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
@@ -87,7 +87,7 @@ const CreateProduct = () => {
             }
         } else {
             const response = await axios.post(
-                "http://localhost:8000/api/v2/product/create-product",
+                "http://localhost:8000/product/post-product",
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
@@ -219,13 +219,12 @@ const CreateProduct = () => {
                             <span className={isEdit ? "" : "text-red-500"}>*</span>
                         </label>
                         <input
-                            name="image"
+                            name="images"
                             type="file"
                             id="upload"
                             className="hidden"
                             multiple
                             onChange={handleImagesChange}
-                            required={!isEdit}
                         />
                         <label htmlFor="upload" className="cursor-pointer">
                             <AiOutlinePlusCircle size={30} color="#555" />
