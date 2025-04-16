@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN, LOGIN_FAILURE } from "./actiontype";
+import { LOGIN, LOGIN_FAILURE } from "./ActionType";
 
 export const loginUser = (data) => async (dispatch) => {
   try {
