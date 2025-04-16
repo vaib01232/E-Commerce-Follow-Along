@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const orderSchema = new mongoose.Schema(
     {
         user: {
@@ -10,7 +11,7 @@ const orderSchema = new mongoose.Schema(
             {
                 product: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Product',
+                    ref: 'Productmodel',
                     required: true,
                 },
                 name: {
@@ -28,12 +29,12 @@ const orderSchema = new mongoose.Schema(
                     min: [0, 'Price cannot be negative'],
                 },
                 image: {
-                    type: Array,
+                    type: String,
                     required: true,
                 },
             },
         ],
-        shippingAddress: {
+        shippingAddress: { 
             country: { type: String, required: true },
             city: { type: String, required: true },
             address1: { type: String, required: true },
@@ -48,8 +49,8 @@ const orderSchema = new mongoose.Schema(
         },
         orderStatus: {
             type: String,
-            enum: ['Processing', 'Shipped', 'Delivered', 'Cancelled'],
-            default: 'Processing',
+            enum: ['Processing','paid','Shipped', 'Delivered', 'Cancelled'],
+            default: 'Processing',   
         },
         deliveredAt: {
             type: Date,
@@ -57,4 +58,6 @@ const orderSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
-module.exports = mongoose.model('Order', orderSchema);
+
+const orders = mongoose.model('Order', orderSchema);
+module.exports=orders

@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import CartProduct from '../pages/cartProduct';
 import NavBar from '../components/auth/nav';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
 
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const userEmail = useSelector((state) => state.auth.email);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/v2/product/cartproducts?email=${'vaibhaav2006@gmail.com'}`)
+    if (!userEmail) return;
+  
+    fetch(`http://localhost:8000/product/cartproducts?email=${userEmail}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -17,15 +21,18 @@ const Cart = () => {
         return res.json();
       })
       .then((data) => {
-        setProducts(data.cart.map(product => ({ quantity: product['quantity'], ...product['productId'] })));
-        console.log("Products fetched:", data.cart);
+        setProducts(data.cart.map(product => ({ 
+          quantity: product.quantity, 
+          ...product.productid 
+        })));
+        console.log("🛒 Cart fetched:", data.cart);
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
       });
-  }, []);
+  }, [userEmail]);
+  
     
-      console.log("Products:", products);
 
       const handlePlaceOrder = () => {
         navigate('/select-address'); 
@@ -40,9 +47,10 @@ const Cart = () => {
                 <h1 className='text-2xl font-semibold'>Cart</h1>
               </div>
               <div className='w-full flex-grow overflow-auto px-3 py-2 gap-y-2'>
-                {products.map(product => (
-                  <CartProduct key={product._id} {...product} />
-                ))}
+              {products.map((product, index) => (
+                <CartProduct key={product.productid || index} {...product} />
+              ))}
+
               </div>
               <div className='w-full p-4 flex justify-end'>
                 <button

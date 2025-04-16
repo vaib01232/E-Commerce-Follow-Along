@@ -9,10 +9,7 @@ function Orders() {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("accessToken");
-        const { data } = await axios.get("http://localhost:5000/api/v1/orders/my-orders", {
-          headers: { Authorization: `Bearer ${token}` },
-          withCredentials: true,
-        });
+        const { data } = await axios.get("http://localhost:8000/order/my-orders");
         setOrders(data.orders);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -28,7 +25,7 @@ function Orders() {
 
     try {
       const token = localStorage.getItem("accessToken");
-      await axios.delete(`http://localhost:5000/api/v1/orders/cancel/${orderId}`, {
+      await axios.delete(`http://localhost:8000/order/cancel/${orderId}`, {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });

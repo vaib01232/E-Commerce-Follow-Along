@@ -1,12 +1,16 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+
 function PrivateRoute({ children }) {
-  const user = useSelector((state) => state.auth.user);
-  const navigate = useNavigate();
-  if(user!==null){
-    return children
-  }
-  navigate('/login')
+  const location = useLocation();
+  const token = useSelector((state) => state.auth.token);
+  const loginSuccessful = useSelector((state) => state.auth.loginSuccessful);
+
+  const isAuthenticated = token && loginSuccessful;
+
+  return isAuthenticated
+    ? children
+    : <Navigate to={`/login?redirect=${location.pathname}`} />;
 }
+
 export default PrivateRoute;

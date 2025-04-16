@@ -2,19 +2,31 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../components/auth/nav';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';  // Import useSelector to get the user's email from Redux
 
 const SelectAddress = () => {
     const [addresses, setAddresses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const userEmail = 'vaibhaav2006@gmail.com';
+    
+    // Retrieve user email from Redux store
+    const userEmail = useSelector((state) => state.auth.email);
+
     useEffect(() => {
         const fetchAddresses = async () => {
+            if (!userEmail) {
+                setError('User not authenticated');
+                setLoading(false);
+                return;
+            }
+
             try {
-                const response = await axios.get('http://localhost:8000/api/v2/user/addresses', {
+                // Use the email from Redux to fetch addresses
+                const response = await axios.get('http://localhost:8000/auth/addresses', {
                     params: { email: userEmail },
                 });
+
                 if (response.status !== 200) {
                     // Handle specific HTTP errors
                     if (response.status === 404) {
@@ -25,6 +37,7 @@ const SelectAddress = () => {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                 }
+
                 const data = response.data;
                 if (data && Array.isArray(data.addresses)) {
                     setAddresses(data.addresses);
@@ -39,11 +52,14 @@ const SelectAddress = () => {
                 setLoading(false);
             }
         };
+
         fetchAddresses();
     }, [userEmail]);
+
     const handleSelectAddress = (addressId) => {
         navigate('/order-confirmation', { state: { addressId, email: userEmail } });
     };
+
     if (loading) {
         return (
             <div className='w-full h-screen flex justify-center items-center'>
@@ -51,6 +67,7 @@ const SelectAddress = () => {
             </div>
         );
     }
+
     if (error) {
         return (
             <div className='w-full h-screen flex flex-col justify-center items-center'>
@@ -64,6 +81,7 @@ const SelectAddress = () => {
             </div>
         );
     }
+
     return (
         <div className='w-full min-h-screen flex flex-col'>
             <NavBar />
@@ -101,4 +119,5 @@ const SelectAddress = () => {
         </div>
     );
 };
+
 export default SelectAddress;

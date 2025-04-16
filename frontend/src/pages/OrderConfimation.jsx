@@ -14,24 +14,55 @@ const OrderConfirmation = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get("/api/cart");
-        setCartItems(response.data);
-        setTotalPrice(
-          response.data.reduce((acc, item) => acc + item.price * item.quantity, 0)
+        const email = JSON.parse(localStorage.getItem("user"))?.email;
+    
+        if (!email) {
+          console.error("No user email found");
+          return;
+        }
+    
+        const response = await axios.get("http://localhost:8000/product/cartproducts", {
+          params: { email }
+        });
+    
+        console.log("Cart response:", response.data);
+        const cart = response.data.cart || [];
+        setCartItems(cart);
+    
+        const total = cart.reduce(
+          (acc, item) => acc + item.productid.price * item.quantity,
+          0
         );
+        setTotalPrice(total);
       } catch (error) {
         console.error("Error fetching cart:", error);
       }
     };
+    
 
     const fetchAddress = async () => {
       try {
-        const response = await axios.get("/api/user/address");
-        setSelectedAddress(response.data);
+        const email = JSON.parse(localStorage.getItem("user"))?.email;
+    
+        if (!email) {
+          console.error("No user email found");
+          return;
+        }
+    
+        const response = await axios.get("http://localhost:8000/auth/addresses", {
+          params: { email }
+        });
+    
+        console.log("📦 Address response data:", response.data);
+    
+        const firstAddress = response.data.addresses[0];
+        setSelectedAddress(firstAddress);
       } catch (error) {
-        console.error("Error fetching address:", error);
+        console.error("❌ Error fetching address:", error);
       }
     };
+    
+    
 
     fetchCartItems();
     fetchAddress();
@@ -45,21 +76,33 @@ const OrderConfirmation = () => {
 
     setLoading(true);
     try {
-      const userEmail = "user@example.com";
+      // const userEmail = JSON.parse(localStorage.getItem("user"))?.email; 
 
       const orderData = {
-        products: cartItems.map((item) => ({
-          productId: item.id,
+        orderItems: cartItems.map((item) => ({
+          name: item.productid.name,           // Optional: whatever info you need per item
+          price: item.productid.price,
           quantity: item.quantity,
         })),
-        totalPrice,
-        address: selectedAddress,
-        userEmail,
-        paymentMethod,
-        isPaid,
+        shippingAddress: selectedAddress,
       };
+      
+      console.log(orderData);
 
-      const response = await axios.post("/api/orders", orderData);
+      const token = localStorage.getItem("token"); // or wherever you're storing it
+
+        const response = await axios.post(
+          "http://localhost:8000/order/place",
+          orderData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        localStorage.getItem("token");
+        console.log("token : ", token);
 
       if (response.status === 201) {
         alert("Order placed successfully!");
@@ -74,91 +117,103 @@ const OrderConfirmation = () => {
   };
 
   return (
-    <div className="order-confirmation">
-      <h2>Order Confirmation</h2>
+    <div className="max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-lg">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Order Confirmation</h2>
 
-      <div className="order-items">
-        <h3>Ordered Products</h3>
+      <div className="mb-6">
+        <h3 className="text-2xl font-medium text-gray-800 mb-4">Ordered Products</h3>
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <div key={item.id} className="order-item">
-              <p>
-                {item.name} - {item.quantity} x ₹{item.price}
-              </p>
+            <div key={item.productid._id} className="bg-gray-100 p-4 rounded-lg mb-4 flex justify-between">
+              <p className="text-lg text-gray-700">{item.productid.name}</p>
+              <p className="text-lg text-gray-700">{item.quantity} x ₹{item.productid.price}</p>
             </div>
           ))
         ) : (
-          <p>No items in the cart.</p>
+          <p className="text-lg text-gray-500">No items in the cart.</p>
         )}
       </div>
 
-      <div className="order-address">
-        <h3>Delivery Address</h3>
+      <div className="mb-6">
+        <h3 className="text-2xl font-medium text-gray-800 mb-4">Delivery Address</h3>
         {selectedAddress ? (
-          <p>
-            {selectedAddress.street}, {selectedAddress.city},{" "}
-            {selectedAddress.pincode}
+          <p className="bg-gray-100 p-4 rounded-lg text-lg text-gray-700">
+            {selectedAddress.address1}, {selectedAddress.address2}, {selectedAddress.city}, {selectedAddress.country} - {selectedAddress.zipCode}
           </p>
         ) : (
-          <p>Loading address...</p>
+          <p className="text-lg text-gray-500">Loading address...</p>
         )}
       </div>
 
-      <div className="order-total">
-        <h3>Total Price: ₹{totalPrice}</h3>
+
+      <div className="mb-6">
+        <h3 className="text-2xl font-medium text-gray-800 mb-4">Total Price: ₹{totalPrice}</h3>
       </div>
 
-      <div className="payment-method">
-        <h3>Select Payment Method:</h3>
-        <label>
+      <div className="mb-6">
+        <h3 className="text-xl font-medium text-gray-800 mb-2">Select Payment Method:</h3>
+        <div className="flex items-center mb-4">
           <input
             type="radio"
             name="payment"
             value="COD"
             checked={paymentMethod === "COD"}
             onChange={() => setPaymentMethod("COD")}
+            className="mr-2"
           />
-          Cash on Delivery (COD)
-        </label>
+          <label className="text-lg text-gray-700">Cash on Delivery (COD)</label>
+        </div>
 
-        <label>
+        <div className="flex items-center">
           <input
             type="radio"
             name="payment"
             value="PayPal"
             checked={paymentMethod === "PayPal"}
             onChange={() => setPaymentMethod("PayPal")}
+            className="mr-2"
           />
-          Pay with PayPal
-        </label>
+          <label className="text-lg text-gray-700">Pay with PayPal</label>
+        </div>
       </div>
 
+        <div>
       {paymentMethod === "PayPal" && (
-        <PayPalScriptProvider options={{ clientId: "AW78-TcxiCBodENWIJtudObD6al4SGS-CKaVm-qFghtbiLZz9jMfzA7W5Nf3loR8tflCjBPnpRicDyQk" }}>
-          <PayPalButtons
-            style={{ layout: "horizontal" }}
-            createOrder={(data, actions) => {
-              return actions.order.create({
-                purchase_units: [
-                  {
-                    amount: {
-                      value: totalPrice.toFixed(2),
-                    },
+        <PayPalScriptProvider options={{ clientId: "AV0JTffBH2GRx69dO-QvVYoMQVN6kbkmB913444zLoEgcpW-cMxohfHshcDUmow7iZ4hls1AdiAcWSj7" }}>
+        <PayPalButtons
+          style={{ layout: "horizontal" }}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: totalPrice.toFixed(2),
                   },
-                ],
-              });
-            }}
-            onApprove={(data, actions) => {
-            }}
-          />
-        </PayPalScriptProvider>
+                },
+              ],
+            });
+          }}
+          onApprove={(data, actions) => {
+            return actions.order.capture().then(function (details) {
+              // You can optionally show a success message here with details.payer.name.given_name
+              placeOrder(true); // Continue with your backend logic
+            });
+          }}
+        />
+      </PayPalScriptProvider>
+      
       )}
 
       {paymentMethod === "COD" && (
-        <button onClick={() => placeOrder(false)} className="place-order-btn" disabled={loading}>
+        <button
+          onClick={() => placeOrder(false)}
+          className="w-full py-3 bg-green-600 text-white text-lg rounded-lg mt-6 hover:bg-green-700 focus:outline-none disabled:bg-gray-400"
+          disabled={loading}
+        >
           {loading ? "Placing Order..." : "Place Order (COD)"}
         </button>
       )}
+      </div>
     </div>
   );
 };
