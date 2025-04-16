@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Edit, Plus, Trash2, MapPin, Mail, Phone, User } from 'lucide-react';
+import Navbar from '../components/auth/nav';
 
 export default function Profile() {
   const [personalDetails, setPersonalDetails] = useState({
@@ -126,6 +127,8 @@ export default function Profile() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-8 text-gray-800">My Profile</h1>
       
@@ -294,5 +297,6 @@ export default function Profile() {
         )}
       </div>
     </div>
+    </>
   );
 }
