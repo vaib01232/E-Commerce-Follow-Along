@@ -29,7 +29,7 @@ const CreateAddress = () => {
         };
         try {
             const response = await axios.post(
-                "http://localhost:8000/auth/add-address",  
+                "https://e-commerce-follow-along-78v4.onrender.com/auth/add-address",  
                 addressData,
                 {
                     headers: { "Content-Type": "application/json" },

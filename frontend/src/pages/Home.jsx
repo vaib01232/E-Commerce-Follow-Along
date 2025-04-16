@@ -15,7 +15,7 @@ export default function Homepage() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/product/get-home-products");
+                const res = await axios.get("https://e-commerce-follow-along-78v4.onrender.com/product/get-home-products");
                 setProductDetails(res.data.products);
             } catch (err) {
                 console.error("Error fetching products:", err);

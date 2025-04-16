@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
 
 
     try {
-        await axios.post("http://localhost:8000/product/cart", data, { withCredentials: true });
+        await axios.post("https://e-commerce-follow-along-78v4.onrender.com/product/cart", data, { withCredentials: true });
         alert("Added to cart!");
     } catch (err) {
         console.error("Error adding to cart:", err);
@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-4 transition-transform transform hover:scale-105 hover:shadow-xl mt-8 ml-8">
       <img
-        src={`http://localhost:8000/${images[0]}`}
+        src={`https://e-commerce-follow-along-78v4.onrender.com/${images[0]}`}
         alt={name}
         className="w-full h-48 object-cover rounded-xl mb-4"
       />

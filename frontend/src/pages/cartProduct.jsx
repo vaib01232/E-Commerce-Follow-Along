@@ -40,7 +40,7 @@ export default function CartProduct({ _id, name, images, quantity, price }) {
     
 
     const updateQuantityVal = (quantity) => {
-        fetch('http://localhost:8000/product/cartproduct/quantity', {
+        fetch('https://e-commerce-follow-along-78v4.onrender.com/product/cartproduct/quantity', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export default function CartProduct({ _id, name, images, quantity, price }) {
         <div className="h-max w-full p-4 flex justify-between border-b border-neutral-300 bg-neutral-100 rounded-lg">
             <div className="flex flex-col gap-y-2">
                 <img
-                    src={`http://localhost:8000${currentImage}`}
+                    src={`https://e-commerce-follow-along-78v4.onrender.com${currentImage}`}
                     alt={name}
                     className="w-32 h-32 object-cover rounded-lg border border-neutral-300"
                 />

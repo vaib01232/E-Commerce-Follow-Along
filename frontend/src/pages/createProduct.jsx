@@ -28,7 +28,7 @@ const CreateProduct = () => {
   useEffect(() => {
       if (isEdit) {
           axios
-              .get(`http://localhost:8000/product/product/${id}`)
+              .get(`https://e-commerce-follow-along-78v4.onrender.com/product/product/${id}`)
               .then((response) => {
                   const p = response.data.product;
                   setName(p.name);
@@ -40,7 +40,7 @@ const CreateProduct = () => {
                   setEmail(p.email);
                   if (p.images && p.images.length > 0) {
                       setPreviewImages(
-                          p.images.map((imgPath) => `http://localhost:8000${imgPath}`)
+                          p.images.map((imgPath) => `https://e-commerce-follow-along-78v4.onrender.com${imgPath}`)
                       );
                   }
               })
@@ -75,7 +75,7 @@ const CreateProduct = () => {
         try {
           if (isEdit) {
             const response = await axios.put(
-                `http://localhost:8000/product/edit-product/${id}`,
+                `https://e-commerce-follow-along-78v4.onrender.com/product/edit-product/${id}`,
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
@@ -87,7 +87,7 @@ const CreateProduct = () => {
             }
         } else {
             const response = await axios.post(
-                "http://localhost:8000/product/post-product",
+                "https://e-commerce-follow-along-78v4.onrender.com/product/post-product",
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },

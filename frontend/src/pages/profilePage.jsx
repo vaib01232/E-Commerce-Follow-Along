@@ -25,7 +25,7 @@ export default function Profile() {
   useEffect(() => {
     if (!email) return;
 
-    fetch(`http://localhost:8000/auth/profile?email=${email}`, {
+    fetch(`https://e-commerce-follow-along-78v4.onrender.com/auth/profile?email=${email}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export default function Profile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Save profile changes
-    fetch(`http://localhost:8000/auth/profile`, {
+    fetch(`https://e-commerce-follow-along-78v4.onrender.com/auth/profile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export default function Profile() {
   };
 
   const handleDeleteAddress = (addressId) => {
-    fetch(`http://localhost:8000/address/${addressId}`, {
+    fetch(`https://e-commerce-follow-along-78v4.onrender.com/address/${addressId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

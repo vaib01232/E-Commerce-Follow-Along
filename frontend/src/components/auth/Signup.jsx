@@ -48,7 +48,7 @@ const Signup = () => {
     };
  // Axios request to backend
  axios
- .post("http://localhost:8000/auth/create-user", newForm, config)
+ .post("https://e-commerce-follow-along-78v4.onrender.com/auth/create-user", newForm, config)
  .then((res) => {
   alert(res.data.message); // Success message from server
    console.log(res.data); // Success response from server

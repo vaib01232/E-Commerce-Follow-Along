@@ -15,11 +15,11 @@ function Myproduct({ _id, name, images, description, price, onDelete }) {
   }, [images]);
 
   const currentImage = images && images.length > 0
-  ? `http://localhost:8000/${images[currentIndex]}`
+  ? `https://e-commerce-follow-along-78v4.onrender.com/${images[currentIndex]}`
   : null;
 
   const handleEdit = () => {
-    navigate(`/product/create-product/${_id}`);
+    navigate(`https://e-commerce-follow-along-78v4.onrender.com/product/create-product/${_id}`);
   };
 
   const handleDelete = async () => {
@@ -28,7 +28,7 @@ function Myproduct({ _id, name, images, description, price, onDelete }) {
 
     try {
       const response = await axios.delete(
-        `http://localhost:8000/product/delete-product/${_id}`
+        `https://e-commerce-follow-along-78v4.onrender.com/product/delete-product/${_id}`
       );
       if (response.status === 200) {
         alert("Product deleted successfully!");
@@ -42,7 +42,7 @@ function Myproduct({ _id, name, images, description, price, onDelete }) {
   };
 
   const handleDetail = () => {
-    navigate(`/product-detail/${_id}`);
+    navigate(`https://e-commerce-follow-along-78v4.onrender.com/product-detail/${_id}`);
   };
 
   return (

@@ -14,7 +14,7 @@ export default function MyProducts() {
         if (!email) return; 
     
         setLoading(true);
-        fetch(`http://localhost:8000/product/my-products?email=${email}`)
+        fetch(`https://e-commerce-follow-along-78v4.onrender.com/product/my-products?email=${email}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);

@@ -21,7 +21,7 @@ const OrderConfirmation = () => {
           return;
         }
     
-        const response = await axios.get("http://localhost:8000/product/cartproducts", {
+        const response = await axios.get("https://e-commerce-follow-along-78v4.onrender.com/product/cartproducts", {
           params: { email }
         });
     
@@ -49,7 +49,7 @@ const OrderConfirmation = () => {
           return;
         }
     
-        const response = await axios.get("http://localhost:8000/auth/addresses", {
+        const response = await axios.get("https://e-commerce-follow-along-78v4.onrender.com/auth/addresses", {
           params: { email }
         });
     
@@ -92,7 +92,7 @@ const OrderConfirmation = () => {
       const token = localStorage.getItem("token"); // or wherever you're storing it
 
         const response = await axios.post(
-          "http://localhost:8000/order/place",
+          "https://e-commerce-follow-along-78v4.onrender.com/order/place",
           orderData,
           {
             headers: {

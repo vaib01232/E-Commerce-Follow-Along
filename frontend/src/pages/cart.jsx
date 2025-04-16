@@ -13,7 +13,7 @@ const Cart = () => {
   useEffect(() => {
     if (!userEmail) return;
   
-    fetch(`http://localhost:8000/product/cartproducts?email=${userEmail}`)
+    fetch(`https://e-commerce-follow-along-78v4.onrender.com/product/cartproducts?email=${userEmail}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
