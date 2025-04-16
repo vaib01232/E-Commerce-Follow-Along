@@ -4,7 +4,7 @@ const { upload } = require("../../multer");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const userrouter = Router();
-const AsyncError = require('../Middleware/catchAsyncError');
+const AsyncError = require('../Middleware/CatchAsyncError');
 const auth = require("../Middleware/auth");
 require('dotenv').config({ path: './src/config/.env' });
 
